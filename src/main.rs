@@ -1,11 +1,36 @@
 use std::env;
+use std::fs;
+use csv::Error;
+use serde::Deserialize;
 
 
-fn main() {
-    
+
+#[derive(Deserialize)]
+struct Problem {
+    question: String,
+    answer: String,
+}
+
+
+fn main() -> Result<(), Error> {
     // Get a handle on the arguments from the command line
     // args[1] would be the argument given to the application 
     let args: Vec<String> = env::args().collect();
-    println!("{:?}", args);   
+    let csv_filename = &args[1];
+
+    //println!("{:?}", args);   
+    let content = fs::read_to_string(csv_filename)
+        .expect("Something went wrong with accessing the file");
+    
+    println!("{}", content);
+    
+    let mut reader = csv::Reader::from_reader(content.as_bytes());
+
+    for record in reader.records() {
+        let record = record?;
+        println!("{} {}",&record[0], &record[1]);
+    }
+
+    Ok(())
 }
 
