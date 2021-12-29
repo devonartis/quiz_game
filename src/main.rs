@@ -17,18 +17,15 @@ struct Config {
 
 impl Config {
     fn new(args: &[String]) -> Config {
+        if args.len() < 2 {
+            panic!("Not enough arguments");
+        }
         let filename = args[1].clone();
         Config { filename }
     }
 }
 
 
-fn get_problems(args: &[String]) -> Config {
-    
-    let filename = args[1].clone();
-    
-    Config{ filename }
-}
 
 fn main() -> Result<(), Error> {
 
