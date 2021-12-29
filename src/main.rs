@@ -32,7 +32,6 @@ impl Config {
 
 
 
-
 fn main() -> Result<(), Error> {
 
     // Get a handle on the arguments from the command line
@@ -56,10 +55,6 @@ fn main() -> Result<(), Error> {
         println!("{:?}, {:?}", record.question, record.answer);
     }
     
-
-    
-    
-
     Ok(())
 }
 
