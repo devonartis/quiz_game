@@ -20,14 +20,9 @@ The CSV file will be in a format like below, where the first column is a questio
 
 ```
 /*
-    When trying to read a csv file without headers a error is generated
+Use the csv::ReaderBuilder when reading csv files With no headers an error occurs:
+ 
+Error: Error(Deserialize { pos: Some(Position { byte: 9, line: 2, record: 1 }), err: DeserializeError { field: None, kind: Message("missing field question") } })
     
-    let mut reader = csv::Reader::from_reader(content.as_bytes());
     
-    
-    for record in reader.deserialize() {
-        let record: Problem = record?;
-        println!("{} {}",record.question, record.answer);
-    } */
-```
-
+*/
