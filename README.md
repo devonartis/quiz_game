@@ -18,3 +18,16 @@ The CSV file will be in a format like below, where the first column is a questio
 
 
 
+```
+/*
+    When trying to read a csv file without headers a error is generated
+    
+    let mut reader = csv::Reader::from_reader(content.as_bytes());
+    
+    
+    for record in reader.deserialize() {
+        let record: Problem = record?;
+        println!("{} {}",record.question, record.answer);
+    } */
+```
+

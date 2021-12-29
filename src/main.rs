@@ -22,14 +22,31 @@ fn main() -> Result<(), Error> {
     let content = fs::read_to_string(csv_filename)
         .expect("Something went wrong with accessing the file");
     
-    println!("{}", content);
+    // println!("{}", content);
     
-    let mut reader = csv::Reader::from_reader(content.as_bytes());
+    /* Use the csv::ReaderBuilder when reading csv files
+     With no headers an error occurs 
+         Error: Error(Deserialize { 
+         pos: Some(Position { byte: 9, line: 2, record: 1 }), 
+         err: DeserializeError { 
+         field: None, kind: Message("missing field question") } })
+    
+    
+    */
 
-    for record in reader.records() {
-        let record = record?;
-        println!("{} {}",&record[0], &record[1]);
+
+    let mut reader = csv::ReaderBuilder::new()
+        .has_headers(false)
+        .from_reader(content.as_bytes());
+
+    for result in reader.deserialize() {
+        let record: Problem = result?;
+        println!("{:?}, {:?}", record.question, record.answer);
     }
+    
+
+    
+    
 
     Ok(())
 }
